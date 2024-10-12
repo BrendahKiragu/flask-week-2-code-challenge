@@ -1,7 +1,8 @@
-from flask import Flask
-from app import db
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import AssociationProxy
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Episode(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
