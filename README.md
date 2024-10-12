@@ -17,24 +17,31 @@ To get started with this project, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/late-show-api.git
+    git clone https://github.com/BrendahKiragu/flask-week-2-code-challenge
     cd late-show-api
     ```
-2. Install the required dependencies:
+2. Install the required dependencies and enter a virtual environment for this project:
     ```bash
-    pip install -r requirements.txt
+    pipenv install 
+    pipenv shell
     ```
 3. Set up the database:
     ```bash
     flask db upgrade
     ```
-4. Run the application:
+
+4. Seed the database:
+    ```bash
+    python seed.py
+    ```  
+
+5. Run the application:
     ```bash
     flask run
     ```
 
 ## 3. Requirements
-This project requires Python version 3.8 or later.
+This project requires Python version 3.8 or later. By running pipenv install the following will be installed:
 
 - Flask
 - Flask-SQLAlchemy
@@ -63,7 +70,7 @@ Represents a guest's appearance on an episode, with the following fields:
 
 ## 5. Routes in app.py
 ### a. GET /episodes
-- Returns a list of all episodes in the following format:
+- http://127.0.0.1:5555/episodes Returns a list of all episodes in the following format:
     ```json
     [
       {
@@ -80,7 +87,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### b. GET /episodes/:id
-- Returns details of a specific episode, including the guest appearances. Example response:
+- http://127.0.0.1:5555/episodes/2 Returns details of a specific episode, including the guest appearances. Example response:
     ```json
     {
       "id": 2,
@@ -103,7 +110,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### c. GET /guests
-- Returns a list of all guests:
+- http://127.0.0.1:5555/guests Returns a list of all guests:
     ```json
     [
       {
@@ -125,7 +132,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### d. POST /appearances
-- Creates a new appearance for a guest on an episode. Example request body:
+- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. You can use Postman to test post on this endpoint, with the following Example request body:
     ```json
     {
       "rating": 5,
@@ -162,7 +169,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ## 6. Running the Endpoints
-To run the endpoints locally, you can use tools like [Postman](https://www.postman.com/) or `curl` to interact with the API:
+To run the endpoints locally, you can use tools like [Postman](https://www.postman.com/) or `curl` on the terminal to interact with the API:
 
 - Example request to get all episodes:
     ```bash
