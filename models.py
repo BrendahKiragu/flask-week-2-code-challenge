@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import AssociationProxy
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -14,7 +15,7 @@ class Episode(db.Model, SerializerMixin):
     serialize_rules = ("-appearances.episode")
 
     #relationships
-    appearances = db.relationship('Appearance', back_populates='episode')
+    appearances = db.relationship('Appearance', back_populates='episode', cascade='all, delete-orphan')
     guests = AssociationProxy('appearances', 'guest', creator=lambda guestObj: Appearance(guest=guestObj))
 
 class Appearance(db.Model, SerializerMixin):
@@ -31,6 +32,11 @@ class Appearance(db.Model, SerializerMixin):
     episode = db.relationship('Episode', back_populates='appearances')
     guest = db.relationship('Guest', back_populates='appearances')
 
+    @validates('rating')
+    def validate_rating(self, key, rating):
+        if not 1 <= rating <= 5:
+            raise ValueError("Rating must be between 1 and 5")
+        return rating
 
 class Guest(db.Model, SerializerMixin):
     __tablename__ = "guests"
@@ -42,6 +48,6 @@ class Guest(db.Model, SerializerMixin):
     serialize_rules = ("-appearances.guest")
 
     #relationships
-    appearances = db.relationship('Appearance', back_populates='guest')
+    appearances = db.relationship('Appearance', back_populates='guest', cascade='all, delete-orphan')
     episodes = AssociationProxy('appearances', 'episode', creator=lambda episodeObj: Appearance(episode=episodeObj))
 
