@@ -41,7 +41,7 @@ with app.app_context():
         assigned_guests = sample(guests, randint(1, 3))
         for guest in assigned_guests:
             appearance = Appearance(
-                rating=randint(1, 10),  # Random rating between 1 and 10
+                rating=randint(1, 5),  # Random rating between 1 and 5
                 episode_id=episode.id,
                 guest_id=guest.id
             )
