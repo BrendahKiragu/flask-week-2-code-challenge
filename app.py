@@ -42,6 +42,11 @@ class EpisodeID(Resource):
     
         return {'error': "Episode not found"}, 404
     
+class Guests(Resource):
+    def get(self):
+        guests = [guest.to_dict() for guest in Guest.query.all()]
+
+        return make_response(guests, 200)
 
 class Appearance(Resource):
     def get(self):
@@ -49,6 +54,7 @@ class Appearance(Resource):
 
 api.add_resource(Episodes, '/episodes')
 api.add_resource(EpisodeID, '/episodes/<int:id>')
+api.add_resource(Guests, '/guests')
 # api.add_resource(Appearance, '/appearances')
 
 if __name__ == '__main__':
