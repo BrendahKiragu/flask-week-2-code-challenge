@@ -32,7 +32,16 @@ class Episodes(Resource):
             episodes_list.append(episode_dict)
 
         return make_response(episodes_list, 200)  
-   
+
+class EpisodeID(Resource):
+    def get(self, id):
+        episode = Episode.query.filter(Episode.id == id) .first()  
+
+        if episode:
+            return make_response(episode.to_dict(), 200) 
+    
+        return {'error': "Episode not found"}, 404
+    
 
 class Appearance(Resource):
     def get(self):
