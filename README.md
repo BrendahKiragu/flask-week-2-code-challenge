@@ -15,45 +15,45 @@ Add validations to the `Appearance` model:
 
 # Routes
 ### a. GET /episodes
-- Return JSON data in the format below:
+- Returns JSON data in the format below:
     ```json
     [
       {
+        "date": "2013-05-12",
         "id": 1,
-        "date": "1/11/99",
-        "number": 1
+        "number": 13
       },
       {
+        "date": "2011-08-25",
         "id": 2,
-        "date": "1/12/99",
-        "number": 2
-      }
+        "number": 90
+      },
     ]
     ```
 
 ### b. GET /episodes/:id
-- If the `Episode` exists, return JSON data in the format below:  
+- If the `Episode` exists, returns JSON data in the format below:  
     ```json
     {
-      "id": 1,
-      "date": "1/11/99",
-      "number": 1,
       "appearances": [
         {
-          "episode_id": 1,
+          "episode_id": 2,
           "guest": {
-            "id": 1,
-            "name": "Michael J. Fox",
-            "occupation": "actor"
+            "id": 4,
+            "name": "Jason Tran",
+            "occupation": "Textile designer"
           },
-          "guest_id": 1,
-          "id": 1,
-          "rating": 4
+          "guest_id": 4,
+          "id": 2,
+          "rating": 2
         }
-      ]
+      ],
+      "date": "2011-08-25",
+      "id": 2,
+      "number": 90
     }
     ```
-- If the `Episode` does not exist, return the following JSON data, along with the appropriate HTTP status code:
+- If the `Episode` does not exist, returns the following JSON data, and a 404 status code.
     ```json
     {
       "error": "Episode not found"
