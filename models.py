@@ -12,7 +12,7 @@ class Episode(db.Model, SerializerMixin):
     date = db.Column(db.String)
     number = db.Column(db.Integer)
 
-    serialize_rules = ("-appearances.episode")
+    serialize_rules = ("-appearances.episode",)
 
     #relationships
     appearances = db.relationship('Appearance', back_populates='episode', cascade='all, delete-orphan')
@@ -45,7 +45,7 @@ class Guest(db.Model, SerializerMixin):
     name = db.Column(db.String) 
     occupation = db.Column(db.String) 
 
-    serialize_rules = ("-appearances.guest")
+    serialize_only = ('id', 'name', 'occupation')
 
     #relationships
     appearances = db.relationship('Appearance', back_populates='guest', cascade='all, delete-orphan')
