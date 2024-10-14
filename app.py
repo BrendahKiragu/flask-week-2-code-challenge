@@ -16,8 +16,12 @@ db.init_app(app)
 
 @app.route('/')
 def index():
-    return "<h1> Welcome to Late Show, Your home of new shows</h1> <p>To view all episodes visit: /episodes</p> <p>To visit a single episode enterr the episode id: /episodes/id</p>"
-
+    return "<h1> Welcome to Late Show, Your home of new shows</h1>\
+            <p>1. To GET all episodes visit: <strong>/episodes</strong></p>\
+            <p>2. To GET a single episode enter the episode id: <strong>/episodes/id</strong></p>\
+            <p>3. To GET all guests: <strong>/guests</strong></p>\
+            <p>4. To POST a new appearance: <strong>/appearances</strong></p>"
+        
 class Episodes(Resource):
     def get(self):
         episodes = Episode.query.all()
@@ -55,14 +59,23 @@ class Appearances(Resource):
         episode_id = data.get('episode_id')
         guest_id = data.get('guest_id')
 
-        if rating is None or not (1 <= rating <=5) : #validates rating
-            return make_response(jsonify({'error': "Rating must be between 1 and 5!"}), 400) 
+        if rating is None or not (1 <= rating <=5) or not isinstance(rating, int): #validates rating
+            return make_response(jsonify({'error': "Rating must be a whole number between 1 and 5!"}), 400) 
         
         if episode_id is None or guest_id is None:
-            return make_response(jsonify({'error': "Missing required fields!!!"}), 400)
-                           
+            return make_response(jsonify({'error': "Missing required fields!!!"}), 404)
+
+        episode = Episode.query.filter_by(id = episode_id).first()
+        guest =  Guest.query.filter_by(id = guest_id).first()
+
+        if not episode:
+            return make_response(jsonify({'error': 'Episode does not exist'}), 404)
+        
+        if not guest:
+            return make_response(jsonify({'error': 'Guest does not exist'}), 404)
+                                          
          #create a new appearance if all checks pass
-        if Episode.query.filter_by(id = episode_id).first() and Guest.query.filter_by(id = guest_id).first():
+        if episode and guest:
             new_appearance = Appearance(
                 rating = rating, 
                 episode_id = episode_id,
@@ -71,8 +84,6 @@ class Appearances(Resource):
             db.session.add(new_appearance)
             db.session.commit()
             return make_response(jsonify(new_appearance.to_dict()), 201)
-        else:
-            return make_response(jsonify({'error': "Invalid episode_id or guest_id"}), 404)
 
 api.add_resource(Episodes, '/episodes')
 api.add_resource(EpisodeID, '/episodes/<int:id>')
