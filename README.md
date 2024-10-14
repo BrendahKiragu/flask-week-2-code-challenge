@@ -5,7 +5,7 @@ This is an API built with Flask and SQLAlchemy to manage episodes, guests, and t
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Models](#models)
-4. [Routes in app.py](#routes-in-app.py)
+4. [Routes in app.py](#routes-in-app-py)
 5. [Running the Endpoints](#running-the-endpoints)
 
 ## Requirements
@@ -170,7 +170,7 @@ Represents a guest's appearance on an episode, with the following fields:
     }
     ```
 
-## 6. Running the Endpoints
+## Running the Endpoints
 To run the endpoints locally, you can use tools like [Postman](https://www.postman.com/) or `curl` on the terminal to interact with the API:
 
 - Example request to get all episodes:
