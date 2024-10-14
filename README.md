@@ -1,54 +1,56 @@
 # Late Show API
-This is an API built with Flask and SQLAlchemy to manage episodes, guests, and their appearances. It provides endpoints for retrieving episode and guest information, as well as creating and validating guest appearances in episodes.
+This is an API built with Flask and SQLAlchemy to manage episodes, guests, and their appearances. It provides endpoints for retrieving all episodes, all guests and an individual episode information, as well as creating a new appearance with the existing episode and guest instances.
 
 # Table of Contents
-1. [Overview](#overview)
+1. [Requirements](#requirements)
 2. [Installation](#installation)
-3. [Requirements](#requirements)
-4. [Models](#models)
-5. [Routes in app.py](#routes-in-app.py)
-6. [Running the Endpoints](#running-the-endpoints)
+3. [Models](#models)
+4. [Routes in app.py](#routes-in-app.py)
+5. [Running the Endpoints](#running-the-endpoints)
 
-## 1. Overview
-The Late Show API is designed to manage episodes, guests, and their appearances on the show. It supports creating new appearances and retrieving information on episodes and guests through various endpoints.
+## Requirements
+- This project requires Python version 3.8 or later.
 
-## 2. Installation
+## Installation
 To get started with this project, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/BrendahKiragu/flask-week-2-code-challenge
-    cd late-show-api
+    git clone git@github.com:BrendahKiragu/flask-week-2-code-challenge.git
+    cd flask-week-2-code-challenge/
     ```
 2. Install the required dependencies and enter a virtual environment for this project:
     ```bash
     pipenv install 
     pipenv shell
     ```
-3. Set up the database:
+3. The database has already been set-up. In case it is missing run the following command to upgrade the migration:
     ```bash
-    flask db upgrade
+      flask db upgrade
+    ```
+4. packages installation: You will need to install the following packages using pip
+    ```bash
+    pip install flask flask_migrate flask_restful sqlalchemy_serializer faker
     ```
 
-4. Seed the database:
+4. Seed the Database. To populate the database with test data, run the following command:
     ```bash
     python seed.py
     ```  
 
-5. Run the application:
-    ```bash
-    flask run
-    ```
+5. Start the API
+- To start the API, set the necessary environment variables and then run the application with the following commands:
+     ```bash
+     export FLASK_APP=app.py
+     export FLASK_RUN_PORT=5555
+     flask run
+     ```
+- Your app will run on port:5555
+    ```arduino
+    http://127.0.0.1:5555
 
-## 3. Requirements
-This project requires Python version 3.8 or later. By running pipenv install the following will be installed:
 
-- Flask
-- Flask-SQLAlchemy
-- Flask-Migrate
-- Flask-RESTful
-
-## 4. Models
+## Models
 ### a. Episode
 Represents an episode of the show, with the following fields:
 - `id` (Integer, primary key)
@@ -68,7 +70,7 @@ Represents a guest's appearance on an episode, with the following fields:
 - `episode_id` (ForeignKey, referencing the `Episode` model)
 - `guest_id` (ForeignKey, referencing the `Guest` model)
 
-## 5. Routes in app.py
+## Routes in app.py
 ### a. GET /episodes
 - http://127.0.0.1:5555/episodes Returns a list of all episodes in the following format:
     ```json
@@ -132,7 +134,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### d. POST /appearances
-- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. You can use Postman to test post on this endpoint, with the following Example request body:
+- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. You can use [Postman](https://postman.com), [Insomnia](https://insomnia.rest), or [Thunder Client](https://www.thunderclient.com) to test post on this endpoint, with the following Example request body:
     ```json
     {
       "rating": 5,
