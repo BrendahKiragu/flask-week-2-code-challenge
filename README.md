@@ -5,8 +5,9 @@ This is an API built with Flask and SQLAlchemy to manage episodes, guests, and t
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Models](#models)
-4. [Routes in app.py](#routes-in-app-py)
+4. [Routes](#routes)
 5. [Running the Endpoints](#running-the-endpoints)
+6. [Conclusion](#conclusion)
 
 ## Requirements
 - This project requires Python version 3.8 or later.
@@ -71,6 +72,9 @@ Represents a guest's appearance on an episode, with the following fields:
 - `guest_id` (ForeignKey, referencing the `Guest` model)
 
 ## Routes in app.py
+- You can use either of the following to test the endpoints: [Postman](https://postman.com), [Insomnia](https://insomnia.rest), or [Thunder Client](https://www.thunderclient.com)
+- Make sure the server is running for the endpoints to work `flask run`
+
 ### a. GET /episodes
 - http://127.0.0.1:5555/episodes Returns a list of all episodes in the following format:
     ```json
@@ -134,7 +138,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### d. POST /appearances
-- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. You can use [Postman](https://postman.com), [Insomnia](https://insomnia.rest), or [Thunder Client](https://www.thunderclient.com) to test post on this endpoint, with the following Example request body:
+- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. To test POST request on this endpoint, use this example request body:
     ```json
     {
       "rating": 5,
@@ -163,7 +167,7 @@ Represents a guest's appearance on an episode, with the following fields:
     }
     ```
 
-- If there are validation errors, the response will include an error message:
+- If there are validation errrs, the response will include an error message:
     ```json
     {
       "errors": ["validation errors"]
@@ -171,7 +175,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ## Running the Endpoints
-To run the endpoints locally, you can use tools like [Postman](https://www.postman.com/) or `curl` on the terminal to interact with the API:
+To run the endpoints on the terminal with `curl` on the terminal to interact with the API:
 
 - Example request to get all episodes:
     ```bash
@@ -184,3 +188,10 @@ To run the endpoints locally, you can use tools like [Postman](https://www.postm
     -H "Content-Type: application/json" \
     -d '{"rating":5, "episode_id":1, "guest_id":1}'
     ```
+- Example for GET all guests:
+    ```bash
+    curl http://127.0.0.1:5555/guests
+    ```  
+
+## Conclusion
+Thank you for exploring this API! We hope this guide has helped you set up and test the application smoothly. If you have any questions or encounter any issues, feel free to reach out [MyGithub](https://github.com/BrendahKiragu)or check the documentation for further assistance. Happy coding!
