@@ -25,7 +25,7 @@ To get started with this project, follow these steps:
     pipenv install 
     pipenv shell
     ```
-3. The database has already been set-up. In case it is missing run the following command to upgrade the migration:
+3. The database has already been set up. In case it is missing run the following command to upgrade the migration:
     ```bash
       flask db upgrade
     ```
@@ -138,7 +138,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ### d. POST /appearances
-- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. To test POST request on this endpoint, use this example request body:
+- http://127.0.0.1:5555/appearances Creates a new appearance for a guest on an episode. To test the 'POST' request on this endpoint, use this example request body:
     ```json
     {
       "rating": 5,
@@ -167,7 +167,7 @@ Represents a guest's appearance on an episode, with the following fields:
     }
     ```
 
-- If there are validation errrs, the response will include an error message:
+- If there are validation errors, the response will include an error message:
     ```json
     {
       "errors": ["validation errors"]
@@ -175,7 +175,7 @@ Represents a guest's appearance on an episode, with the following fields:
     ```
 
 ## Running the Endpoints
-To run the endpoints on the terminal with `curl` on the terminal to interact with the API:
+You run the endpoints on the terminal with `curl` interact with the API in case you cannot access the suggested tools:[Postman](https://postman.com), [Insomnia](https://insomnia.rest), or [Thunder Client](https://www.thunderclient.com)
 
 - Example request to get all episodes:
     ```bash
@@ -194,4 +194,4 @@ To run the endpoints on the terminal with `curl` on the terminal to interact wit
     ```  
 
 ## Conclusion
-Thank you for exploring this API! We hope this guide has helped you set up and test the application smoothly. If you have any questions or encounter any issues, feel free to reach out [MyGithub](https://github.com/BrendahKiragu)or check the documentation for further assistance. Happy coding!
+Thank you for exploring this API! We hope this guide has helped you set up and test the application smoothly. If you have any questions or encounter any issues, feel free to reach out [MyGithub](https://github.com/BrendahKiragu) or check the documentation for further assistance. Happy coding!
