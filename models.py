@@ -34,8 +34,8 @@ class Appearance(db.Model, SerializerMixin):
 
     @validates('rating')
     def validate_rating(self, key, rating):
-        if not 1 <= rating <= 5:
-            raise ValueError("Rating must be between 1 and 5")
+        if not 1 <= rating <= 5 or not isinstance(rating, int):
+            raise ValueError("Rating must be a whole number between 1 and 5")
         return rating
 
 class Guest(db.Model, SerializerMixin):
