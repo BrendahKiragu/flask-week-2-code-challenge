@@ -71,7 +71,7 @@ Represents a guest's appearance on an episode, with the following fields:
 - `episode_id` (ForeignKey, referencing the `Episode` model)
 - `guest_id` (ForeignKey, referencing the `Guest` model)
 
-## Routes in app.py
+## Routes
 - You can use either of the following to test the endpoints: [Postman](https://postman.com), [Insomnia](https://insomnia.rest), or [Thunder Client](https://www.thunderclient.com)
 - Make sure the server is running for the endpoints to work `flask run`
 
